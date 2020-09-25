@@ -38,7 +38,28 @@
 
         public string Encode(string input)
         {
-            return input;
+            var substitutedInput = SubstituteInputWithKeyword(input);
+
+            return substitutedInput;
+        }
+
+        private string SubstituteInputWithKeyword(string input)
+        {
+            string substitutedInput = null;
+            var keywordIndex = 0;
+
+            for (var index = 0; index < input.Length; index++)
+            {
+                if (keywordIndex == _keyword.Length)
+                {
+                    keywordIndex = 0;
+                }
+
+                substitutedInput += _keyword[keywordIndex];
+                keywordIndex++;
+            }
+
+            return substitutedInput;
         }
     }
 }
