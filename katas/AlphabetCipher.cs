@@ -39,6 +39,11 @@
         public string Encode(string input)
         {
             var substitutedInput = SubstituteInputWithKeyword(input);
+            var encryptedInput = string.Empty;
+            for (var index = 0; index < input.Length; index++)
+            {
+                encryptedInput += _substitutionChart[input[index] % 32 - 1][substitutedInput[index] % 32 - 1];
+            }
 
             return substitutedInput;
         }
