@@ -30,7 +30,21 @@
 
         public string Decode(string input)
         {
-            return input;
+            var substitutedInput = SubstituteInputWithKeyword(input);
+            var encryptedInput = string.Empty;
+            for (var index = 0; index < input.Length; index++)
+            {
+                var offset = 'z' - substitutedInput[index] + 1;
+                var encryptedChar = input[index] + offset;
+                if (encryptedChar > 'z')
+                {
+                    encryptedChar -= 26;
+                }
+
+                encryptedInput += (char)encryptedChar;
+            }
+
+            return encryptedInput;
         }
 
         private string SubstituteInputWithKeyword(string input)
