@@ -1,4 +1,6 @@
-﻿namespace katas
+﻿using System;
+
+namespace katas
 {
     public class AlphabetCipher
     {
@@ -11,41 +13,49 @@
 
         public string Encode(string input)
         {
-            var substitutedInput = SubstituteInputWithKeyword(input);
-            var encryptedInput = string.Empty;
-            for (var index = 0; index < input.Length; index++)
-            {
-                var offset = 'z' - substitutedInput[index] + 1;
-                var encryptedChar = input[index] - offset;
-                if (encryptedChar < 'a')
-                {
-                    encryptedChar += 26;
-                }
-
-                encryptedInput += (char)encryptedChar;
-            }
-
-            return encryptedInput;
+            return Process(input, ApplyEncodingOffset);
         }
 
         public string Decode(string input)
+        {
+            return Process(input, ApplyDecodingOffset);
+        }
+
+        private char ApplyEncodingOffset(char input, int offset)
+        {
+            var encryptedChar = input - offset;
+            if (encryptedChar < 'a')
+            {
+                encryptedChar += 26;
+            }
+
+            return (char)encryptedChar;
+        }
+
+        private char ApplyDecodingOffset(char input, int offset)
+        {
+            var encryptedChar = input + offset;
+            if (encryptedChar > 'z')
+            {
+                encryptedChar -= 26;
+            }
+
+            return (char)encryptedChar;
+        }
+
+        private string Process(string input, Func<char, int, char> applyOffset)
         {
             var substitutedInput = SubstituteInputWithKeyword(input);
             var encryptedInput = string.Empty;
             for (var index = 0; index < input.Length; index++)
             {
                 var offset = 'z' - substitutedInput[index] + 1;
-                var encryptedChar = input[index] + offset;
-                if (encryptedChar > 'z')
-                {
-                    encryptedChar -= 26;
-                }
-
-                encryptedInput += (char)encryptedChar;
+                encryptedInput += applyOffset(input[index], offset);
             }
 
             return encryptedInput;
         }
+
 
         private string SubstituteInputWithKeyword(string input)
         {
