@@ -17,5 +17,19 @@ namespace katas.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Should_decode_message_given_keyword()
+        {
+            // Arrange
+            const string expected = "meetmebythetree";
+            var sut = new AlphabetCipher("scones");
+
+            // Act
+            var actual = sut.Decode("egsgqwtahuiljgs");
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

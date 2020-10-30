@@ -28,6 +28,11 @@
             return encryptedInput;
         }
 
+        public string Decode(string input)
+        {
+            return input;
+        }
+
         private string SubstituteInputWithKeyword(string input)
         {
             string substitutedInput = null;
