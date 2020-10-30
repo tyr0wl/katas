@@ -45,7 +45,7 @@
                 encryptedInput += _substitutionChart[input[index] % 32 - 1][substitutedInput[index] % 32 - 1];
             }
 
-            return substitutedInput;
+            return encryptedInput;
         }
 
         private string SubstituteInputWithKeyword(string input)
