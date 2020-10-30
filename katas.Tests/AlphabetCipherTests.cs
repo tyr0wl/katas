@@ -5,7 +5,7 @@ namespace katas.Tests
     public class AlphabetCipherTests
     {
         [Test]
-        public void Should_encode_input_with_given_keyword()
+        public void Should_encode_message_with_given_keyword()
         {
             // Arrange
             const string expected = "egsgqwtahuiljgs";
